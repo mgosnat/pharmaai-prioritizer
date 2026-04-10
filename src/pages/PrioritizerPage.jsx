@@ -375,6 +375,7 @@ export default function PrioritizerPage() {
           <span className={styles.navSub}>Use Case Prioritizer</span>
         </div>
         <div className={styles.navRight}>
+          <a href="/fr" className={styles.navLangLink}>FR</a>
           {step === 'dashboard' && useCases.length > 0 && (
             <>
               <button className={styles.navBtn} onClick={startAdd}>+ Add use case</button>
