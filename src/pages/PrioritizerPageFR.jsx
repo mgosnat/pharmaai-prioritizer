@@ -124,7 +124,7 @@ function exportPDF(useCases) {
   doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(...C.blue)
   doc.text('Cas d\'usage priorisés', 14, y)
   doc.setFont('helvetica', 'normal'); doc.setFontSize(7); doc.setTextColor(...C.slate)
-  doc.text('Score (0-13) = Valeur + Faisabilite + Maturite, ajuste pour le risque EU AI Act', 196, y, { align: 'right' })
+  doc.text('Score (0-13) = Valeur + Faisabilite + Maturite, ajuste risque EU AI Act', 196, y, { align: 'right' })
   y += 6
 
   sorted.forEach((uc, i) => {
@@ -179,7 +179,7 @@ function exportPDF(useCases) {
       const ry = py + 13
       doc.setFillColor(...C.bluePale); doc.roundedRect(19, ry, 172, 12, 1, 1, 'F')
       doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5); doc.setTextColor(...C.blue)
-      doc.text('Prochaine etape:', 22, ry+5)
+      doc.text('Etape suivante :', 22, ry+5)
       doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.ink)
       const lines = doc.splitTextToSize(uc.recommendation, 145)
       doc.text(lines[0] || '', 55, ry+5)
@@ -239,7 +239,7 @@ export default function PrioritizerPageFR() {
       return `"${u.name}" (${u.function}): score ${score}/13, priorité ${priority.label}, EU AI Act: ${risk.label}, valeur ${u.business_value}/4, faisabilité ${u.feasibility}/4, maturité ${u.org_maturity}/4`
     }).join('\n')
 
-    const prompt = `Tu es un expert en stratégie IA pour l'industrie pharmaceutique. Voici ${ucs.length} cas d'usage IA scorés pour priorisation:\n\n${summary}\n\nPour chaque cas d'usage, fournis une seule recommandation actionnable (1 phrase max, concrète et spécifique). Format JSON uniquement: [{"name": "...", "recommendation": "..."}, ...]. Réponds en français.`
+    const prompt = `Tu es un expert en stratégie IA pour l'industrie pharmaceutique. Voici ${ucs.length} cas d'usage IA scorés pour priorisation:\n\n${summary}\n\nPour chaque cas d'usage, fournis une seule recommandation actionnable (1 phrase max, concrète et spécifique). Format JSON uniquement: [{"name": "...", "recommendation": "..."}, ...]. IMPORTANT: toutes les recommandations doivent être rédigées en français uniquement.`
 
     try {
       const res = await fetch('/api/claude', {
